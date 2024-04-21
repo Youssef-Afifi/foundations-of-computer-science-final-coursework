@@ -1,9 +1,9 @@
-import random  # Import the random module
+import random  
 import time
 import math
 
-loop_counter_generate_prime = 0  # Counter for loop iterations in generate_prime function
-loop_counter_find_private_key = 0  # Counter for loop iterations in find_private_key function
+loop_counter_generate_prime = 0  # Counter for loop iterations in generate prime function
+loop_counter_find_private_key = 0  # Counter for loop iterations in find private_key function
 
 def is_prime(num):
     if num < 2:
@@ -17,13 +17,13 @@ def generate_prime(N):
     global loop_counter_generate_prime
     while True:  
         loop_counter_generate_prime += 1  # Increment the loop counter
-        prime_option = random.randint(2, N)  # Generate a random number in the range [2, N]
-        if is_prime(prime_option):  # Check if the generated number is prime
-            return prime_option  # If prime, return the prime number
+        prime_option = random.randint(2, N)  # Generate a random number
+        if is_prime(prime_option):   # Check if the generated number is prime
+            return prime_option   #  If prime, return the prime number
 
 N = int(input("Enter n (product of two primes): "))  # Input the product of two primes
 e = int(input("Enter public key: "))  # Input the public key
-
+c = int(input("Enter cipher: "))
 start_time = time.time()*1000  # Record the starting time in milliseconds
 
 p, q = 0, 0  
@@ -45,7 +45,8 @@ def find_private_key(e, phi_n):
 
 d = find_private_key(e, phi_n)  # Find the private key d
 print("Private key (d):", d)  # Print the private key d
-
+m = pow(c, d, N) #calculate decrypted message
+print("the decrypted message: ", m) #print decrypted messsage
 end_time = time.time()  # Record the ending time
 exec_time = end_time - start_time  # Calculate the execution time
 print("Runtime:", "{:.20f}".format(time.time()*1000 - start_time), "milliseconds")  # Print the execution time in milliseconds
